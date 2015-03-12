@@ -1,11 +1,11 @@
 {
   "name": "WeatherNode",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "WeatherNode",
   "main": "app.js",
   "author": {
-    "name": "jim",
-    "email": ""
+    "name": "xlevel",
+    "email": "jim@xlevel.org.uk"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

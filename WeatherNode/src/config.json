@@ -1,0 +1,10 @@
+﻿{
+    "interval": 3000,
+    "sensors": [
+        {
+            "type": "./mockSensor.js",
+            "id": "Sensor 1",
+            "settings": { }
+        }
+    ]
+}

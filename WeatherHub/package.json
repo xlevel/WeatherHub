@@ -1,0 +1,10 @@
+{
+  "name": "WeatherHub",
+  "version": "0.0.0",
+  "description": "WeatherHub",
+  "main": "app.js",
+  "author": {
+    "name": "jim",
+    "email": ""
+  }
+}

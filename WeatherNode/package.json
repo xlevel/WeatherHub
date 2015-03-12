@@ -1,0 +1,19 @@
+{
+  "name": "WeatherNode",
+  "version": "0.0.0",
+  "description": "WeatherNode",
+  "main": "app.js",
+  "author": {
+    "name": "jim",
+    "email": ""
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-mocha-test": "^0.12.7",
+    "mocha": "^2.1.0"
+  },
+  "dependencies": {
+    "rewire": "^2.3.1"
+  }
+}

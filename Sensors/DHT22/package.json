@@ -1,0 +1,13 @@
+{
+  "name": "DHT22",
+  "version": "0.1.0",
+  "description": "WeatherNode DHT-22/AM2302 Sensor ",
+  "main": "dht22.js",
+  "author": {
+    "name": "xlevel",
+    "email": "jim@xlevel.org.uk"
+  },
+  "dependencies": {
+    "node-dht-sensor": "0.0.7"
+  }
+}

@@ -2,7 +2,7 @@
     'use strict';
 }());
 
-const sensors = require('./Sensors/sensors.js'),
+const sensors = require('./sensors/sensors.js'),
     config = require('./config.json');
 
 sensors.initialize(config);

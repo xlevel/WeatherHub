@@ -1,5 +1,9 @@
 ﻿{
     "interval": 3000,
+    "hub": {
+        "domain": "localhost",
+        "port": 8080
+    },
     "sensors": [
         {
             "type": "./mockSensor.js",

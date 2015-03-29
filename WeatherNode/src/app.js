@@ -3,14 +3,16 @@
 }());
 
 const sensors = require('./sensors/sensors.js'),
+    dataAccess = require('./dataAccess.js'),
     config = require('./config.json');
 
 sensors.initialize(config);
+dataAccess.initialize(config);
 
 setInterval(function () {
-    sensors.read(function (results) { 
+    sensors.read(function (results) {
         console.log(results);
-        // Send to the data access layer
+        dataAccess.save(results);
     });
 }, config.interval);
 

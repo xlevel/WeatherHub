@@ -1,0 +1,13 @@
+{
+  "name": "BMP085",
+  "version": "0.1.0",
+  "description": "WeatherNode BMP085 i2c barometer/temperature sensor.",
+  "main": "bmp085.js",
+  "author": {
+    "name": "xlevel",
+    "email": "jim@xlevel.org.uk"
+  },
+  "dependencies": {
+    "i2c": "^0.2.1"
+  }
+}

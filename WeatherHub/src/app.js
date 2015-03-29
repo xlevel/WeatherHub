@@ -16,6 +16,6 @@ sensor.initialize(config);
 
 app.post('/api/sensors/upload/', sensors.upload);
 
-app.get('/api/sensors/:id', sensors.view)
+app.get('/api/sensors/:id', sensors.view);
 
 app.listen(8080);

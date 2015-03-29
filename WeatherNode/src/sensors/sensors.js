@@ -2,8 +2,6 @@
     'use strict';
 }());
 
-const timer = require('timers');
-
 module.exports = {
 
     initialize: function (config) {

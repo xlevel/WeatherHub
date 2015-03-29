@@ -1,0 +1,17 @@
+﻿{
+    "interval": 3000,
+    "sensors": [
+        {
+	    "type": "../../../Sensors/DHT22/dht22.js",
+	    "id": "Sensor 1",
+	    "settings": {
+	        "pin": 4
+	    }
+	},
+	{
+            "type": "./mockSensor.js",
+            "id": "Sensor 2",
+            "settings": { }
+        }
+    ]
+}

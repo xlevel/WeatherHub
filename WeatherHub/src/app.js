@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 const config = {};
 
-sensor.initialize(config);
+sensors.initialize(config);
 
 app.post('/api/sensors/upload/', sensors.upload);
 

@@ -19,7 +19,7 @@ module.exports = {
             'Content-Type': 'application/json',
             'Content-Length': Buffer.byteLength(data, 'utf8')
         };
-        var request = client.request('POST', '/api/sensor/bulk/', headers);       
+        var request = client.request('POST', '/api/sensors/upload/', headers);       
 
         request.write(data);
         request.end();

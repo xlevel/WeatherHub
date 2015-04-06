@@ -2,6 +2,8 @@
     'use strict';
 }());
 
+var data = require('../data/data.js');
+
 module.exports = {
     
     initialize : function (config) {
@@ -10,6 +12,11 @@ module.exports = {
     
     upload : function (req, res) {
         console.log(req.body);
+
+        //split out different readings
+        //decide on the reading type
+        //data.saveReading();
+
         res.send("ok");
     },
     

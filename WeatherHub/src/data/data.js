@@ -7,7 +7,7 @@ var mysql = require('mysql');
 module.exports = {
     initialize: function(config) {
         this.config = config;
-    };
+    },
 
     saveReading: function(sensorId, readingTypeType, time, value) {
         var connection = CreateConnection(this.config);

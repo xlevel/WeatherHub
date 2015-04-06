@@ -114,30 +114,6 @@ describe('Sensors', function () {
                 done();
             });
         });
-        
-        it('the result contains the sensors temperature reading', function (done) { 
-            var sensors = require('../src/sensors/sensors.js');
-            var config = { sensors: [{ id: 'sensor 1', type: './mockSensor.js' } ] };
-            
-            sensors.initialize(config);
-            sensors.read(function (result) {
-                
-                assert.equal(result[0].temp, 19.2);
-                done();
-            });
-        });
-        
-        it('the result contains the sensors humidity reading', function (done) { 
-            var sensors = require('../src/sensors/sensors.js');
-            var config = { sensors: [{ id: 'sensor 1', type: './mockSensor.js' } ] };
-            
-            sensors.initialize(config);
-            sensors.read(function (result) {
-                
-                assert.equal(result[0].humidity, 45.5);
-                done();
-            });
-        });
     });
 });
 

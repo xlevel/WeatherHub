@@ -8,6 +8,6 @@
     "email": "jim@xlevel.org.uk"
   },
   "dependencies": {
-    "node-dht-sensor": "0.0.7"
+    "node-dht-sensor": "0.0.8"
   }
 }

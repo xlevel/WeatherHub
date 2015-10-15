@@ -2,39 +2,42 @@
     'use strict';
 }());
 
-var mysql = require('mysql');
+var server = require('sqlite3').verbose();
 
 module.exports = {
     initialize: function(config) {
         this.config = config;
+
+	var database = createConnection(config);
+
+	database.all("SELECT name FROM sqlite_master WHERE type='table' AND name='Readings'", function(err, rows) {
+		if (rows.length == 0) {
+			database.run("CREATE TABLE Readings(SensorId TEXT, ReadingType INTEGER, Date TEXT,  Value REAL)");
+		}
+	});
+
+	database.close();
     },
 
-    saveReading: function(sensorId, readingTypeType, time, value) {
-        var connection = CreateConnection(this.config);
+    saveReading: function(sensorId, readingType, time, value) {
+        var databasen = CreateConnection(this.config);
 
-        connection.query('INSERT INTO reading SET ?', 
-            {time: time, sensorId: sensorId, readingType: readingType, value: value}, 
-            function(err, result) {
+        database.run("INSERT INTO reading SET (SensorId='" +
+		sensorId + "', Reading='" + 
+		readingType + "', Date = '" + 
+		time + "', Value = '" +
+		value + "')");
 
-            if (err) throw err;
-
-            console.log('Saved reading: '+result.insertId);
-        });
+	database.close();
+ 
     },
 
     getReadingsForSensor: function(sensorId, sensorType, startTime, endTime) {
-
+	//
     },
 
     createConnection: function(config) {
-        var connection = mysql.createConnection({
-            host: config.data.host,
-            user: config.data.user,
-            password: config.data.password
-        });
-
-        connection.connect();
-
-        return connection;
+	var database = new server.Database('readings.db');
+        return database;/
     }
 };

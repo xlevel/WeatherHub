@@ -231,3 +231,4 @@ build/Release
 node_modules
 
 WeatherNode/src/config.json
+.vscode

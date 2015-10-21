@@ -1,10 +1,10 @@
-﻿var assert = require('assert');
+﻿var assert = require('assert'),
+    sensors = require('../src/sensors/sensors.js');
 
 describe('Sensors', function () {
     describe('Initialize', function () {
         
         it('throws an exception if the config is null', function () {
-            var sensors = require('../src/sensors/sensors.js');
             
             assert.throws(
                 function () {
@@ -18,7 +18,6 @@ describe('Sensors', function () {
         });
 
         it('throws an exception if the config is undefined', function () {
-            var sensors = require('../src/sensors/sensors.js');
             
             assert.throws(
                 function () {
@@ -32,7 +31,6 @@ describe('Sensors', function () {
         });
 
         it('throws an exception if the config contains an undefined sensors definition', function () {
-            var sensors = require('../src/sensors/sensors.js');
             var config = {};
     
             assert.throws(
@@ -47,7 +45,6 @@ describe('Sensors', function () {
         });
 
         it('populates the configuration property with a correctly formatted config object.', function () {
-            var sensors = require('../src/sensors/sensors.js');
             var config = { sensors: [] };
             
             assert.doesNotThrow(
@@ -64,7 +61,6 @@ describe('Sensors', function () {
     describe('Read', function () {
         
         it('returns an empty result if no sensor is defined', function (done) { 
-            var sensors = require('../src/sensors/sensors.js');
             var config = { sensors: [] };
             
             sensors.initialize(config);
@@ -78,7 +74,6 @@ describe('Sensors', function () {
         });
 
         it('returns a single result if one sensor is defined', function (done) {
-            var sensors = require('../src/sensors/sensors.js');
             var config = { sensors: [{ id: 'sensor 1', type: './mockSensor.js' } ] };
             
             sensors.initialize(config);
@@ -92,7 +87,6 @@ describe('Sensors', function () {
         });
         
         it('returns one result for each sensor defined', function (done) { 
-            var sensors = require('../src/sensors/sensors.js');
             var config = { sensors: [{ id: 'sensor 1', type: './mockSensor.js' } , { id: 'sensor 2', type: './mockSensor.js' } ] };
             
             sensors.initialize(config);
@@ -104,7 +98,6 @@ describe('Sensors', function () {
         });
         
         it('the result contains the sensors id', function (done) {
-            var sensors = require('../src/sensors/sensors.js');
             var config = { sensors: [ { id: 'sensor 1', type: './mockSensor.js' } ] };
             
             sensors.initialize(config);

@@ -7,6 +7,26 @@ var http = require('http');
 module.exports = {
 
     initialize: function (config) {
+        if (config === null || config === undefined) {
+            throw new Error("Error: Missing initialization configuration");
+        }
+
+        if (config.hub === undefined) { 
+            throw new Error("Error: Missing hub configuration");
+        }
+        
+        if (config.hub.port === undefined) {
+            throw new Error("Error: Missing hub port value");
+        }
+        
+        if (isNaN(config.hub.port)) {
+            throw new Error("Error: Invalid hub port value");
+        }
+        
+        if (config.hub.domain === undefined) {
+            throw new Error("Error: Missing hub domain value");
+        }
+        
         this.config = config;
     },
 

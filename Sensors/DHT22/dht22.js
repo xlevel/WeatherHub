@@ -16,8 +16,10 @@ module.exports = {
 
 		return {
 			id: this.config.id,
-			temp: reading.temperature.toFixed(2),
-			humidity: reading.humidity.toFixed(2)
+            readings: [
+                { type: "t", value: reading.temperature.toFixed(2) },
+                { type: "h", value: reading.humidity.toFixed(2) }
+			]
 		};
 
 	}

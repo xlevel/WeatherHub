@@ -5,10 +5,16 @@
 var server = require('sqlite3').verbose();
 
 module.exports = {
+
+    createConnection: function(config) {
+	var database = new server.Database('readings.db');
+        return database;
+    },
+	
     initialize: function(config) {
         this.config = config;
 
-	var database = createConnection(config);
+	var database = this.createConnection(config);
 
 	database.all("SELECT name FROM sqlite_master WHERE type='table' AND name='Readings'", function(err, rows) {
 		if (rows.length == 0) {
@@ -20,7 +26,7 @@ module.exports = {
     },
 
     saveReading: function(sensorId, readingType, time, value) {
-        var databasen = CreateConnection(this.config);
+        var database = this.CreateConnection(this.config);
 
         database.run("INSERT INTO reading SET (SensorId='" +
 		sensorId + "', Reading='" + 
@@ -34,10 +40,5 @@ module.exports = {
 
     getReadingsForSensor: function(sensorId, sensorType, startTime, endTime) {
 	//
-    },
-
-    createConnection: function(config) {
-	var database = new server.Database('readings.db');
-        return database;/
     }
 };

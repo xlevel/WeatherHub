@@ -12,11 +12,9 @@ module.exports = {
     read: function () {
         return {
             id: this.config.id,
-            readings: [
-                { type: "t", value: 19.2 },
-                { type: "h", value: 45.5 },
-                { type: "p", value: 945 }
-            ]
+            temp: 19.2 ,
+            humidity: 45.5 ,
+            pressure: 945
         };
     }
 };

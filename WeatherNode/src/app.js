@@ -3,9 +3,10 @@
 }());
 
 const sensors = require('./sensors/sensors.js'),
-    dataAccess = require('./dataAccess.js'),
+    DataAccess = require('./dataAccess.js'),
     config = require('./config.json');
 
+var dataAccess = new DataAccess();
 sensors.initialize(config);
 dataAccess.initialize(config);
 

@@ -1,12 +1,13 @@
 ﻿var http = require('http'),
     assert = require('assert'),
     sinon = require('sinon'),
-    dataAccess = require('../src/dataAccess.js');
+    DataAccess = require('../src/dataAccess.js');
 
 describe('Data Access', function() {
     describe('Initialize', function() {
         
         it('throws an exception if the config is null', function() {
+            var dataAccess = new DataAccess();
             assert.throws(
                 function() {
                     dataAccess.initialize(null);
@@ -20,6 +21,7 @@ describe('Data Access', function() {
         });
         
         it('throws an exception if the config is undefined', function() {
+            var dataAccess = new DataAccess();
             assert.throws(
                 function() {
                     dataAccess.initialize(undefined);
@@ -33,6 +35,7 @@ describe('Data Access', function() {
         });
         
         it('throws an exception if the config contains an undefined hub definition', function() {
+            var dataAccess = new DataAccess();
             var config = {};
             
             assert.throws(
@@ -47,6 +50,7 @@ describe('Data Access', function() {
         });
         
         it('throws an exception if the config contains an undefined hub port value', function() { 
+            var dataAccess = new DataAccess();
             var config = { hub: { domain: "localhost" } };
             
              assert.throws(
@@ -61,6 +65,7 @@ describe('Data Access', function() {
         });
         
         it('throws an exception if the config contains an undefined hub domain value', function() { 
+            var dataAccess = new DataAccess();
             var config = { hub: { port: 8080 } };
             
              assert.throws(
@@ -75,6 +80,7 @@ describe('Data Access', function() {
         });
         
         it('throws an exception if the config contains an invalid hub port value', function() { 
+            var dataAccess = new DataAccess();
             var config = { hub: { domain: "localhost", port: "bob" } };
             
              assert.throws(
@@ -89,6 +95,7 @@ describe('Data Access', function() {
         });
         
         it('populates the configuration property with a correctly formatted config object.', function () {
+            var dataAccess = new DataAccess();
             var config = { hub: { domain: "localhost", port: 8080 } };
             
             assert.doesNotThrow(
@@ -103,5 +110,4 @@ describe('Data Access', function() {
         
     });
     
-    describe('Save', function() {});
 });

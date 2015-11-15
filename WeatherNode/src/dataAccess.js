@@ -4,9 +4,9 @@
 
 var http = require('http');
 
-module.exports = {
+module.exports = function() {
 
-    initialize: function (config) {
+    this.initialize = function (config) {
         if (config === null || config === undefined) {
             throw new Error("Error: Missing initialization configuration");
         }
@@ -28,20 +28,29 @@ module.exports = {
         }
         
         this.config = config;
-    },
+    };
 
-    save: function (results) {
-        var client = http.createClient(this.config.hub.port, this.config.hub.domain);
+    this.save = function (results) {
         var data = JSON.stringify(results);
-
-        var headers = {
-            'Host': this.config.hub.domain,
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(data, 'utf8')
+        
+        var options = {
+            hostname: this.config.hub.domain,
+            port: this.config.hub.port,
+            path: '/api/sensors/upload/',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',//'text/plain',
+                'Content-Length': data.length
+            }
         };
-        var request = client.request('POST', '/api/sensors/upload/', headers);       
-
+        
+        var request = http.request(options, function(result) {
+            //Process status code
+            console.log('STATUS: ' + result.statusCode);
+        });
+        
+        console.log(data);
         request.write(data);
         request.end();
-    }
+    };
 };

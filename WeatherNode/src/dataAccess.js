@@ -39,7 +39,7 @@ module.exports = function() {
             path: '/api/sensors/upload/',
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',//'text/plain',
+                'Content-Type': 'application/json',
                 'Content-Length': data.length
             }
         };

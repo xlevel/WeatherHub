@@ -235,3 +235,4 @@ node_modules
 typings
 
 WeatherNode/src/config.json
+*.db

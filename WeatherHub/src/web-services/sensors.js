@@ -2,24 +2,22 @@
     'use strict';
 }());
 
-var data = require('../data/data.js');
+var Data = require('../data/data.js');
+var data = new Data();
 
 var initialize = function (config) {
-
+    data.initialize(config);
 };
     
 var upload = function (req, res) {
     
-    var readings = [];
+    console.log(req.body);
     req.body.forEach(function (sensor) {
         createReadings(sensor).forEach(function (sensorReading) {
-            readings.push(sensorReading);
+            console.log(sensorReading);
+            data.saveReading(sensorReading.sensorId, sensorReading.readingType, sensorReading.time, sensorReading.value);
         });
     });
-    
-    console.log(readings);
-    
-    //data.saveReading();
     
     res.send("ok");
 };

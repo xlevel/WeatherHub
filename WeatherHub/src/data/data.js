@@ -4,41 +4,43 @@
 
 var server = require('sqlite3').verbose();
 
-module.exports = {
+module.exports = function()
+{
+	var database;
 
-    createConnection: function(config) {
-	var database = new server.Database('readings.db');
+    this.getConnection = function(config) {
+		if (!database) { database = new server.Database('readings.db'); }
+		
         return database;
-    },
+    };
 	
-    initialize: function(config) {
+	this.releaseConnection = function() {
+		if (database) { database.close(); }	
+	};
+	
+    this.initialize = function(config) {
         this.config = config;
 
-	var database = this.createConnection(config);
+		var database = this.getConnection(config);
+	
+		database.all("SELECT name FROM sqlite_master WHERE type='table' AND name='Readings'", function(err, rows) {
+			if (rows.length == 0) {
+				database.run("CREATE TABLE Readings(SensorId TEXT, ReadingType INTEGER, Date TEXT,  Value REAL)");
+			}
+		});
+    };
 
-	database.all("SELECT name FROM sqlite_master WHERE type='table' AND name='Readings'", function(err, rows) {
-		if (rows.length == 0) {
-			database.run("CREATE TABLE Readings(SensorId TEXT, ReadingType INTEGER, Date TEXT,  Value REAL)");
-		}
-	});
+    this.saveReading = function(sensorId, readingType, time, value) {
+        var database = this.getConnection(this.config);
 
-	database.close();
-    },
+        database.run("INSERT INTO Readings (SensorId, ReadingType, Date, Value) VALUES ('" +
+			sensorId + "', '" + 
+			readingType + "', '" + 
+			time + "', '" +
+			value + "')");
+    };
 
-    saveReading: function(sensorId, readingType, time, value) {
-        var database = this.CreateConnection(this.config);
-
-        database.run("INSERT INTO reading SET (SensorId='" +
-		sensorId + "', Reading='" + 
-		readingType + "', Date = '" + 
-		time + "', Value = '" +
-		value + "')");
-
-	database.close();
- 
-    },
-
-    getReadingsForSensor: function(sensorId, sensorType, startTime, endTime) {
+    this.getReadingsForSensor = function(sensorId, sensorType, startTime, endTime) {
 	//
     }
 };

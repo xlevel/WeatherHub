@@ -1,0 +1,14 @@
+{
+  "name": "ds18b20-sensor",
+  "version": "0.0.1",
+  "description": "A sensor package for a DS18B20 temperature sensor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ds18b20": "^0.1.0"
+  }
+}

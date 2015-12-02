@@ -11,10 +11,10 @@ module.exports = {
 		sensorLib.initialize(22, config.settings.pin);
 	},
 
-	read: function() {
+	read: function(callback) {
 		var reading = sensorLib.read();
 
-		return {
+		var data = {
 			id: this.config.id,
             readings: [
                 { type: "t", value: reading.temperature.toFixed(2) },
@@ -22,5 +22,6 @@ module.exports = {
 			]
 		};
 
+		callback(data);
 	}
 };

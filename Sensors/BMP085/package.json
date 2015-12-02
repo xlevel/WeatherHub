@@ -8,6 +8,6 @@
     "email": "jim@xlevel.org.uk"
   },
   "dependencies": {
-    "i2c": "^0.2.1"
+    "bmp085": "https://github.com/xlevel/bmp085"
   }
 }

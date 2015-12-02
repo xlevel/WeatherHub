@@ -11,9 +11,9 @@ sensors.initialize(config);
 dataAccess.initialize(config);
 
 setInterval(function () {
-    sensors.read(function (results) {
-        console.log(results);
-        dataAccess.save(results);
+    sensors.read(function (result) {
+        console.log(result);
+        dataAccess.save(result);
     });
 }, config.interval);
 

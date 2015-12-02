@@ -9,8 +9,8 @@ module.exports = {
         this.config = config;
     },
     
-    read: function () {
-        return {
+    read: function (callback) {
+        var data = {
             id: this.config.id,
             readings: [
                 { type: "t", value: 19.2 },
@@ -18,5 +18,7 @@ module.exports = {
                 { type: "p", value: 945 }
             ]
         };
+
+	callback(data);
     }
 };

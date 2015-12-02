@@ -18,16 +18,12 @@ module.exports = {
 
     read: function (callback) {
         
-        var results = [];
-        
         for ( var i =0; i < this.config.sensors.length; i++){
             var sensorConfig = this.config.sensors[i];
             var sensor = require(sensorConfig.type);
             sensor.initialize(sensorConfig);
 
-            results.push(sensor.read());
+            sensor.read(callback);
         }
-
-        return callback(results);
     }
 };

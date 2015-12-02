@@ -12,11 +12,9 @@ var initialize = function (config) {
 var upload = function (req, res) {
     
     console.log(req.body);
-    req.body.forEach(function (sensor) {
-        createReadings(sensor).forEach(function (sensorReading) {
-            console.log(sensorReading);
-            data.saveReading(sensorReading.sensorId, sensorReading.readingType, sensorReading.time, sensorReading.value);
-        });
+    createReadings(req.body).forEach(function (sensorReading) {
+        console.log(sensorReading);
+        data.saveReading(sensorReading.sensorId, sensorReading.readingType, sensorReading.time, sensorReading.value);
     });
     
     res.send("ok");
@@ -45,7 +43,7 @@ var getReadingType = function (readingType) {
     return value;
 };
     
-var createReadings = function (data, index) {
+var createReadings = function (data) {
     var readings = [];
     
     data.readings.forEach(function (reading) {

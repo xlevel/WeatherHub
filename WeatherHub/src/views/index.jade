@@ -1,0 +1,8 @@
+extend layout
+block content
+	p Sensors:
+	
+	ul
+		each item in data
+			li= item.name + ' Current: ' + item.current + item.scale
+	

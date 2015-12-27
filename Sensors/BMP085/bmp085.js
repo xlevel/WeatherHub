@@ -4,13 +4,12 @@
 
 var sensorLib = require('bmp085');
 
-module.exports = {
+var BMP085Sensor = function(config) {
+  this.config = config;  
+};
 
-	initialize: function (config) {
-		this.config = config;
-	},
-
-	read: function(callback) {
+BMP085Sensor.prototype = {
+    read: function (callback) {
 		var sensor = new sensorLib();
 		var self = this;
 
@@ -25,6 +24,12 @@ module.exports = {
 
 			callback(data);
 		});
-	}
-
+    }
 };
+
+module.exports = {
+    create: function(config) {
+      return new BMP085Sensor(config);  
+    }
+};
+

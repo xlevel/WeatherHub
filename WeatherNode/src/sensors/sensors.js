@@ -20,8 +20,9 @@ module.exports = {
         
         for ( var i =0; i < this.config.sensors.length; i++){
             var sensorConfig = this.config.sensors[i];
-            var sensor = require(sensorConfig.type);
-            sensor.initialize(sensorConfig);
+            var SensorType = require(sensorConfig.type);
+            var sensor =  SensorType.create(sensorConfig);
+            //sensor.initialize(sensorConfig);
 
             sensor.read(callback);
         }

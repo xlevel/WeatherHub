@@ -2,13 +2,11 @@
     'use strict';
 }());
 
-module.exports = {
-    
-    initialize: function (config) 
-    {
-        this.config = config;
-    },
-    
+var MockSensor = function(config) {
+  this.config = config;  
+};
+
+MockSensor.prototype = {
     read: function (callback) {
         var data = {
             id: this.config.id,
@@ -20,5 +18,11 @@ module.exports = {
         };
 
 	callback(data);
+    }
+};
+
+module.exports = {
+    create: function(config) {
+      return new MockSensor(config);  
     }
 };

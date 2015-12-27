@@ -4,14 +4,13 @@
 
 var sensorLib = require('node-dht-sensor');
 
-module.exports = {
+var DHT22Sensor = function(config) {
+  this.config = config;
+  sensorLib.initialize(22, config.settings.pin);
+};
 
-	initialize: function (config) {
-		this.config = config;
-		sensorLib.initialize(22, config.settings.pin);
-	},
-
-	read: function(callback) {
+DHT22Sensor.prototype = {
+    read: function (callback) {
 		var reading = sensorLib.read();
 
 		var data = {
@@ -23,5 +22,11 @@ module.exports = {
 		};
 
 		callback(data);
-	}
+    }
+};
+
+module.exports = {
+    create: function(config) {
+      return new DHT22Sensor(config);  
+    }
 };

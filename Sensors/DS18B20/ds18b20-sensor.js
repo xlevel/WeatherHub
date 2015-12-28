@@ -12,7 +12,7 @@ var DS18B20Sensor = function(config) {
 
 DS18B20Sensor.prototype = {
     read: function (callback) {
-		var reading = sensorLib.temperatureSync(config.settings.id);
+		var reading = sensorLib.temperatureSync(this.config.settings.id);
 		
         var data = {
             id: this.config.id,

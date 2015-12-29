@@ -2,7 +2,8 @@
     'use strict';
 }());
 
-var server = require('sqlite3').verbose();
+var server = require('sqlite3').verbose(),
+	Sensor = require('../Models/sensor.js');
 
 module.exports = function()
 {
@@ -28,6 +29,8 @@ module.exports = function()
 				database.run("CREATE TABLE Readings(SensorId TEXT, ReadingType INTEGER, Date TEXT,  Value REAL)");
 			}
 		});
+		
+		//this.releaseConnection();
     };
 
     this.saveReading = function(sensorId, readingType, time, value) {
@@ -38,7 +41,26 @@ module.exports = function()
 			readingType + "', '" + 
 			time + "', '" +
 			value + "')");
+			
+		//this.releaseConnection();
     };
+	
+	this.getSensorsAvailable = function(callback) {
+		var database = this.getConnection(this.config);
+		
+		database.all(
+			"select SensorId, ReadingType, Date, Value  from Readings group by SensorId, ReadingType", 
+			function(error, rows) { 
+			
+			var results = [];
+			rows.forEach(function(row) { 
+				results.push(Sensor.create(row.SensorId, row.ReadingType, row.Value, row.Date));
+			});
+			
+			callback(results);
+		});
+		
+	};
 
     this.getReadingsForSensor = function(sensorId, sensorType, startTime, endTime) {
 	//

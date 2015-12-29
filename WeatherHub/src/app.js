@@ -4,7 +4,8 @@
 
 var express = require('express'),
     bodyParser = require('body-parser'),
-    sensors = require('./web-services/sensors.js');
+    sensors = require('./web-services/sensors.js'),
+    Data = require('./data/data.js');
 
 var app = express();
 app.set('views', __dirname + '/views');
@@ -19,10 +20,14 @@ sensors.initialize(config);
 
 app.post('/api/sensors/upload/', sensors.upload);
 
-app.get('/api/sensors/:id', sensors.view);
+//app.get('/api/sensors/:id', sensors.view);
 
 app.get('/', function (req, res) {
-   res.render('index', { title : 'Home', data : [ { name : 'Sensor 1', current: 19, max: 22, min: 17, scale: '°C' }, {name : 'Sensor 2', current: 55, max: 60, min: 54, scale: '%'} ] } ); 
+    var data = new Data();
+    data.initialize(config);
+    data.getSensorsAvailable(function(results) {
+           res.render('index', { title : 'Home', data : results } ); 
+    });
 });
 
 app.listen(8080);

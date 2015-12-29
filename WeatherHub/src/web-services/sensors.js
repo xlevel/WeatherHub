@@ -2,7 +2,9 @@
     'use strict';
 }());
 
-var Data = require('../data/data.js');
+var Data = require('../data/data.js'),
+    Reading = require('../Models/reading.js');
+    
 var data = new Data();
 
 var initialize = function (config) {
@@ -12,7 +14,15 @@ var initialize = function (config) {
 var upload = function (req, res) {
     
     console.log(req.body);
-    createReadings(req.body).forEach(function (sensorReading) {
+    
+    var content = req.body;
+    var readings = [];
+    
+    content.readings.forEach(function (reading) {
+        readings.push(Reading.create(content.id, reading.type, reading.value));
+    });
+    
+    readings.forEach(function (sensorReading) {
         console.log(sensorReading);
         data.saveReading(sensorReading.sensorId, sensorReading.readingType, sensorReading.time, sensorReading.value);
     });
@@ -20,46 +30,13 @@ var upload = function (req, res) {
     res.send("ok");
 };
     
-var view = function (req, res) {
-    var id = req.parms.id;
-    console.log(id);
-};
-    
-var getReadingType = function (readingType) {
-    var value = -1;
-    
-    switch (readingType) {
-        case "t":
-            value = 1;
-            break;
-        case "h":
-            value = 2;
-            break;
-        case "p":
-            value = 3;
-            break;
-    }
-    
-    return value;
-};
-    
-var createReadings = function (data) {
-    var readings = [];
-    
-    data.readings.forEach(function (reading) {
-        readings.push({
-            time: Date(),
-            sensorId: data.id,
-            readingType: getReadingType(reading.type),
-            value: reading.value
-        });
-    });
-    
-    return readings;
-};
+// var view = function (req, res) {
+//     var id = req.parms.id;
+//     console.log(id);
+// };
 
 module.exports = {
     initialize : initialize,
-    upload : upload,
-    view : view
+    upload : upload//,
+    //view : view
 };

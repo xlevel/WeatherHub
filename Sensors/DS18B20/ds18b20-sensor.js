@@ -4,8 +4,6 @@
 
 var sensorLib = require('ds18b20');
 
-// Sensor Id: 10-00080283a977
-
 var DS18B20Sensor = function(config) {
   this.config = config;  
 };

@@ -6,7 +6,7 @@ var Reading = function(id, readingType, value, time) {
     this.id = id;
     this.readingType = getReadingType(readingType);
     this.value = value;
-    this.time = time == undefined ? Date() : time;
+    this.time = time === undefined ? Date() : time;
 };
 
 var getReadingType = function (readingType) {

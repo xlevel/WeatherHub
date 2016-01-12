@@ -25,7 +25,7 @@ module.exports = function()
 		var database = this.getConnection(config);
 	
 		database.all("SELECT name FROM sqlite_master WHERE type='table' AND name='Readings'", function(err, rows) {
-			if (rows.length == 0) {
+			if (rows.length === 0) {
 				database.run("CREATE TABLE Readings(SensorId TEXT, ReadingType INTEGER, Date TEXT,  Value REAL)");
 			}
 		});
@@ -64,5 +64,5 @@ module.exports = function()
 
     this.getReadingsForSensor = function(sensorId, sensorType, startTime, endTime) {
 	//
-    }
+    };
 };

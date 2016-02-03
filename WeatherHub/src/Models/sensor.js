@@ -7,7 +7,7 @@ var Sensor = function(id, readingType, value, time) {
     this.readingType = readingType;
     this.scale = getScale(readingType);
     this.value = value;
-    this.time = time == undefined ? Date() : time;
+    this.time = time == undefined ? new Date() : new Date(time);
 };
 
 var getScale = function (readingType) {

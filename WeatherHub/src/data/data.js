@@ -26,7 +26,7 @@ module.exports = function()
 	
 		database.all("SELECT name FROM sqlite_master WHERE type='table' AND name='Readings'", function(err, rows) {
 			if (rows.length == 0) {
-				database.run("CREATE TABLE Readings(SensorId TEXT, ReadingType INTEGER, Date TEXT,  Value REAL)");
+				database.run("CREATE TABLE Readings(SensorId TEXT, ReadingType INTEGER, Date INTEGER, Value REAL)");
 			}
 		});
 		
@@ -38,9 +38,9 @@ module.exports = function()
 
         database.run("INSERT INTO Readings (SensorId, ReadingType, Date, Value) VALUES ('" +
 			sensorId + "', '" + 
-			readingType + "', '" + 
-			time + "', '" +
-			value + "')");
+			readingType + "', " + 
+			time.getTime() + ", " +
+			value + ")");
 			
 		//this.releaseConnection();
     };
@@ -49,7 +49,7 @@ module.exports = function()
 		var database = this.getConnection(this.config);
 		
 		database.all(
-			"select SensorId, ReadingType, Date, Value  from Readings group by SensorId, ReadingType", 
+			"SELECT SensorId, ReadingType, Date, Value FROM Readings GROUP BY SensorId, ReadingType", 
 			function(error, rows) { 
 			
 			var results = [];

@@ -24,7 +24,7 @@ var upload = function (req, res) {
     
     readings.forEach(function (sensorReading) {
         console.log(sensorReading);
-        data.saveReading(sensorReading.sensorId, sensorReading.readingType, sensorReading.time, sensorReading.value);
+        data.saveReading(sensorReading.id, sensorReading.readingType, sensorReading.time, sensorReading.value);
     });
     
     res.send("ok");

@@ -2,7 +2,7 @@
     
     grunt.initConfig({
         jshint: {
-            files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
+            files: ['Gruntfile.js', 'src/app.js', 'src/data/*.js', 'src/Models/*.js', 'src/web-services/*.js', 'test/**/*.js'],
             options: {
                 esnext: true
             }
@@ -17,12 +17,20 @@
                 },
                 src: ['tests/**/*-tests.js']
             }
+        },
+        sass: {
+            dist: {
+                files: {
+                    'src/static/main.css' : 'src/static/sass/main.scss'                    
+                }
+            }
         }
-
     });
     
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-mocha-test');
+    grunt.loadNpmTasks('grunt-sass');
     
-    grunt.registerTask('default', ['jshint', 'mochaTest']);
+    
+    grunt.registerTask('default', ['jshint', 'mochaTest', 'sass']);
 };

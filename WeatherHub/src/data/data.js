@@ -64,5 +64,5 @@ module.exports = function()
 
     this.getReadingsForSensor = function(sensorId, sensorType, startTime, endTime) {
 	//
-    }
+    };
 };

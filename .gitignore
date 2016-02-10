@@ -236,5 +236,7 @@ typings
 
 WeatherNode/src/config.json
 *.db
+*.bak
+assets
 
 **/static/*.css

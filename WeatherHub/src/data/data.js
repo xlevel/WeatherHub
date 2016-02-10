@@ -11,55 +11,55 @@ module.exports = function()
 
     this.getConnection = function(config) {
 		if (!database) { database = new server.Database('readings.db'); }
-		
+
         return database;
     };
-	
+
 	this.releaseConnection = function() {
-		if (database) { database.close(); }	
+		if (database) { database.close(); }
 	};
-	
+
     this.initialize = function(config) {
         this.config = config;
 
 		var database = this.getConnection(config);
-	
+
 		database.all("SELECT name FROM sqlite_master WHERE type='table' AND name='Readings'", function(err, rows) {
 			if (rows.length == 0) {
 				database.run("CREATE TABLE Readings(SensorId TEXT, ReadingType INTEGER, Date INTEGER, Value REAL)");
 			}
 		});
-		
+
 		//this.releaseConnection();
     };
 
     this.saveReading = function(sensorId, readingType, time, value) {
         var database = this.getConnection(this.config);
 
-        database.run("INSERT INTO Readings (SensorId, ReadingType, Date, Value) VALUES ('" +
-			sensorId + "', '" + 
-			readingType + "', " + 
-			time.getTime() + ", " +
-			value + ")");
-			
+        database.run("INSERT INTO Readings (SensorId, ReadingType, Date, Value) VALUES (?, ?, ?, ?)",
+			sensorId,
+			readingType,
+			time.getTime(),
+			value);
+
 		//this.releaseConnection();
     };
-	
+
 	this.getSensorsAvailable = function(callback) {
 		var database = this.getConnection(this.config);
-		
+
 		database.all(
 			"SELECT SensorId, ReadingType, Date, Value FROM Readings GROUP BY SensorId, ReadingType", 
-			function(error, rows) { 
-			
+			function(error, rows) {
+
 			var results = [];
-			rows.forEach(function(row) { 
+			rows.forEach(function(row) {
 				results.push(Sensor.create(row.SensorId, row.ReadingType, row.Value, row.Date));
 			});
-			
+
 			callback(results);
 		});
-		
+
 	};
 
     this.getReadingsForSensor = function(sensorId, sensorType, startTime, endTime) {

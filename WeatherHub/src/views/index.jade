@@ -3,7 +3,6 @@ block content
 	p Sensors:
 	
 	
-	ul
+	ul.list-unstyled
 		each item in data
-			li.row!= '<span class="col-xs-12 col-sm-6">'+item.id + '</span><span class="col-xs-12 col-sm-6">Current: ' + item.value + item.scale +'</span>'
-	
+			li.row!= '<span class="col-xs-6 col-sm-4">'+item.id + '</span><span class="col-xs-6 col-sm-4">Current: ' + item.value + item.scale + '</span><span class="col-xs-12 col-sm-4">Time: ' + item.time.toLocaleTimeString() +'</span>'

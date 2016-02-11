@@ -2,7 +2,8 @@ extend layout
 block content
 	p Sensors:
 	
+	
 	ul
 		each item in data
-			li= item.id + ' Current: ' + item.value + item.scale
+			li.row!= '<span class="col-xs-12 col-sm-6">'+item.id + '</span><span class="col-xs-12 col-sm-6">Current: ' + item.value + item.scale +'</span>'
 	

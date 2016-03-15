@@ -2,7 +2,13 @@ extend layout
 block content
 	p Sensors:
 	
+<<<<<<< HEAD
 	ul
 		each item in data
 			li= item.id + ' Current: ' + item.value + item.scale + ' Last Read: ' + item.time
+=======
+>>>>>>> 1e13517345d29478758c8b57000bed3fbb40b589
 	
+	ul.list-unstyled
+		each item in data
+			li.row!= '<span class="col-xs-6 col-sm-4">'+item.id + '</span><span class="col-xs-6 col-sm-4">Current: ' + item.value + item.scale + '</span><span class="col-xs-12 col-sm-4">Time: ' + item.time.toLocaleTimeString() +'</span>'

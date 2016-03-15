@@ -7,11 +7,10 @@ const sensors = require('./sensors/sensors.js'),
     config = require('./config.json');
 
 var dataAccess = new DataAccess();
-sensors.initialize(config);
 dataAccess.initialize(config);
 
 setInterval(function () {
-    sensors.read(function (result) {
+    sensors.read(config, function (result) {
         console.log(result);
         dataAccess.save(result);
     });

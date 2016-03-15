@@ -22,9 +22,3 @@ MockSensor.prototype = {
 };
 
 module.exports = MockSensor;
-
-// module.exports = {
-//     create: function(config) {
-//       return new MockSensor(config);  
-//     }
-// };

@@ -1,4 +1,4 @@
-﻿var http = require('http'),
+﻿/*var http = require('http'),
     assert = require('assert'),
     sinon = require('sinon'),
     DataAccess = require('../src/dataAccess.js');
@@ -110,4 +110,4 @@ describe('Data Access', function() {
         
     });
     
-});
+});*/

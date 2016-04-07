@@ -25,8 +25,4 @@ DHT22Sensor.prototype = {
     }
 };
 
-module.exports = {
-    create: function(config) {
-      return new DHT22Sensor(config);  
-    }
-};
+module.exports = DHT22Sensor;

@@ -27,9 +27,5 @@ BMP085Sensor.prototype = {
     }
 };
 
-module.exports = {
-    create: function(config) {
-      return new BMP085Sensor(config);  
-    }
-};
+module.exports = BMP085Sensor;
 

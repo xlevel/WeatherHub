@@ -23,8 +23,4 @@ DS18B20Sensor.prototype = {
     }
 };
 
-module.exports = {
-    create: function(config) {
-      return new DS18B20Sensor(config);  
-    }
-};
+module.exports = DS18B20Sensor;

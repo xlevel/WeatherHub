@@ -1,8 +1,6 @@
-﻿(function () {
-    'use strict';
-} ());
+'use strict';
 
-var validateConfig = function (config) {
+function validateConfig(config) {
     if (config === null || config === undefined) {
         throw new Error("Error: Missing initialization configuration");
     }
@@ -10,20 +8,20 @@ var validateConfig = function (config) {
     if (config.sensors === undefined) {
         throw new Error("Error: Missing sensor configuration");
     }
-};
+}
+
+function read(config, callback) {
+    validateConfig(config);
+
+    for (let i = 0; i < config.sensors.length; i++) {
+        const sensorConfig = config.sensors[i];
+        const SensorType = require(sensorConfig.type);
+        const sensor = new SensorType(sensorConfig);
+
+        sensor.read(callback);
+    }
+}
 
 module.exports = {
-
-    read: function (config, callback) {
-
-        validateConfig(config);
-
-        for (var i = 0; i < config.sensors.length; i++) {
-            var sensorConfig = config.sensors[i];
-            var SensorType = require(sensorConfig.type);
-            var sensor = new SensorType(sensorConfig);
-
-            sensor.read(callback);
-        }
-    }
+    read
 };

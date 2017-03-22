@@ -1,13 +1,11 @@
-﻿(function () {
-    'use strict';
-}());
+'use strict';
 
-var MockSensor = function(config) {
-  this.config = config;  
-};
+class MockSensor {
+    constructor(config) {
+        this.config = config;
+    }
 
-MockSensor.prototype = {
-    read: function (callback) {
+    read(callback){
         var data = {
             id: this.config.id,
             readings: [
@@ -17,8 +15,8 @@ MockSensor.prototype = {
             ]
         };
 
-	callback(data);
+        callback(data);
     }
-};
+}
 
 module.exports = MockSensor;

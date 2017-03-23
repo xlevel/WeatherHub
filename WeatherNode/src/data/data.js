@@ -1,15 +1,12 @@
-(function () {
-    'use strict';
-} ());
+'use strict';
 
-const DataAccess = require('./adafruitIo.js')
+const DataAccess = require('./adafruitIo.js');
+
+function save(config, reading) {
+    const dataAccess = new DataAccess(config);
+    dataAccess.save(reading);
+}
 
 module.exports = {
-    save: function (config, reading) {
-        
-        var dataAccess = new DataAccess(config);
-        
-        dataAccess.initialize();
-        dataAccess.save(reading);
-    }
+    save
 };

@@ -1,64 +1,53 @@
-(function () {
-    'use strict';
-}());
+'use strict';
 
-var http = require('http');
+const http = require('https');
 
-var AdafruitIo = function(config) {
-  this.config = config.data;  
-};
+class AdafruitIo {
+    constructor(config) {
+        this.config = config.data;  
+    }
 
-var saveReading =  function(aio, feedId, value) {
-    console.log("AIO: "+aio);
-    console.log("Feed Id: "+feedId);
-    console.log("Value: "+value);
+    saveReading(aio, userId, feedId, value) {
+        console.log(`AIO: ${aio} - User Id: ${userId} - Feed Id: ${feedId} - Value: ${value}`);
     
-    var reading = {};
-    reading.value = value;
+        const reading = {};
+        reading.value = value;
     
-    var data = JSON.stringify(reading);
+        const data = JSON.stringify(reading);
         
-    var options = {
-        hostname: "io.adafruit.com",
-        path: '/api/feeds/'+feedId+'/data/',
-        method: 'POST',
-        headers: {
-            'X-AIO-key': aio,
-            'Content-Type': 'application/json',
-            'Content-Length': data.length
-        }
-    };
+        const options = {
+            hostname: "io.adafruit.com",
+            path: `/api/v2/${userId}/feeds/${feedId}/data/`,
+            method: 'POST',
+            headers: {
+                'X-AIO-key': aio,
+                'Content-Type': 'application/json',
+                'Content-Length': data.length
+            }
+        };
     
-    var request = http.request(options, function(result) {
-        //Process status code
-        console.log('STATUS: ' + result.statusCode);
-    });    
+        const request = http.request(options, function(result) {
+            console.log('STATUS: ' + result.statusCode);
+        });    
 
-    console.log(data);
-    request.write(data);
-    request.end();
-};
+        console.log(data);
+        request.write(data);
+        request.end();
+    }
 
-AdafruitIo.prototype = {
-    initialize: function() {
-        //TODO: Make sure that all required feeds are available
-        console.log(this.config);  
-    },
-    
-    save: function (reading) {
-        var self = this;
-        var id = reading.id;
+    save(reading) {
+        const id = reading.id;
         
-        reading.readings.forEach(function(element) {
+        reading.readings.forEach((element) => {
             
-            var feed = self.config.config.feeds.find(function(feed) {
+            const feed = this.config.config.feeds.find(function(feed) {
                 return feed.sensor == id && feed.type == element.type;
             });
             
-            saveReading(self.config.config.aioKey, feed.id, element.value);
+            this.saveReading(this.config.config.aioKey, this.config.config.user, feed.id, element.value);
         }, this);
                    
     }
-};
+}
 
 module.exports = AdafruitIo;

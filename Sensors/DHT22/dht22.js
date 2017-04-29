@@ -5,7 +5,8 @@ const sensorLib = require('node-dht-sensor');
 class DHT22Sensor{
     constructor(config) {
         this.config = config;
-        sensorLib.initialize(22, config.settings.pin);
+        const type = config.settings.type ? config.settings.type : 22;
+        sensorLib.initialize(type, config.settings.pin);
     }
 
     read(callback) {

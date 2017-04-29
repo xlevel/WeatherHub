@@ -8,6 +8,6 @@
     "email": "jim@xlevel.org.uk"
   },
   "dependencies": {
-    "bmp085": "https://github.com/xlevel/bmp085"
+    "bmp085": "~0.4.0"
   }
 }
